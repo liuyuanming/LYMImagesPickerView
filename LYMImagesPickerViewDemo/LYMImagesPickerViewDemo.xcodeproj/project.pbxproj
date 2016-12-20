@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCA50921FC2139F82BDD2583 /* Pods_LYMImagesPickerViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A031546B44AA93E7FCC224 /* Pods_LYMImagesPickerViewDemo.framework */; };
 		D07F82A21E09014E007A85C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D07F82A11E09014E007A85C1 /* main.m */; };
 		D07F82A51E09014E007A85C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D07F82A41E09014E007A85C1 /* AppDelegate.m */; };
 		D07F82A81E09014E007A85C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D07F82A71E09014E007A85C1 /* ViewController.m */; };
@@ -19,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		547983693B0310BC893BD15A /* Pods-LYMImagesPickerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYMImagesPickerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LYMImagesPickerViewDemo/Pods-LYMImagesPickerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B2A031546B44AA93E7FCC224 /* Pods_LYMImagesPickerViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LYMImagesPickerViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B39C590EA0AADEC25CE3E4F2 /* Pods-LYMImagesPickerViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYMImagesPickerViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LYMImagesPickerViewDemo/Pods-LYMImagesPickerViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		D07F829D1E09014E007A85C1 /* LYMImagesPickerViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LYMImagesPickerViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07F82A11E09014E007A85C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D07F82A31E09014E007A85C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -41,17 +45,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA50921FC2139F82BDD2583 /* Pods_LYMImagesPickerViewDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CDA69C0894646DDB4CE573B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B39C590EA0AADEC25CE3E4F2 /* Pods-LYMImagesPickerViewDemo.debug.xcconfig */,
+				547983693B0310BC893BD15A /* Pods-LYMImagesPickerViewDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D07F82941E09014E007A85C1 = {
 			isa = PBXGroup;
 			children = (
 				D07F829F1E09014E007A85C1 /* LYMImagesPickerViewDemo */,
 				D07F829E1E09014E007A85C1 /* Products */,
+				CDA69C0894646DDB4CE573B7 /* Pods */,
+				E4918DFD1E68050167CC05BA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +116,14 @@
 			name = LYMImagesPickerView;
 			sourceTree = "<group>";
 		};
+		E4918DFD1E68050167CC05BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2A031546B44AA93E7FCC224 /* Pods_LYMImagesPickerViewDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +131,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D07F82B41E09014E007A85C1 /* Build configuration list for PBXNativeTarget "LYMImagesPickerViewDemo" */;
 			buildPhases = (
+				1606DBAC841E941CA0C0E022 /* [CP] Check Pods Manifest.lock */,
 				D07F82991E09014E007A85C1 /* Sources */,
 				D07F829A1E09014E007A85C1 /* Frameworks */,
 				D07F829B1E09014E007A85C1 /* Resources */,
+				BF8AD5E18949EC43F28A9006 /* [CP] Embed Pods Frameworks */,
+				4E6CDB6F8FB5D955FCDBD0DA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,6 +194,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1606DBAC841E941CA0C0E022 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4E6CDB6F8FB5D955FCDBD0DA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LYMImagesPickerViewDemo/Pods-LYMImagesPickerViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF8AD5E18949EC43F28A9006 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LYMImagesPickerViewDemo/Pods-LYMImagesPickerViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D07F82991E09014E007A85C1 /* Sources */ = {
@@ -293,6 +368,7 @@
 		};
 		D07F82B51E09014E007A85C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B39C590EA0AADEC25CE3E4F2 /* Pods-LYMImagesPickerViewDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9V6VDDSTH6;
@@ -306,6 +382,7 @@
 		};
 		D07F82B61E09014E007A85C1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 547983693B0310BC893BD15A /* Pods-LYMImagesPickerViewDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9V6VDDSTH6;
