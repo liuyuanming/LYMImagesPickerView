@@ -27,16 +27,16 @@ static NSString * const kLYMImageCollectionViewCellId = @"LYMImageCollectionView
         self.backgroundColor = [UIColor whiteColor];
         
         CGFloat edgeMargin = 10.f;
-        CGFloat cellMargin = 10.f;
-        CGFloat insetTopAndBotton = 10;
-        CGFloat cellW = ([UIScreen mainScreen].bounds.size.width - insetTopAndBotton * 2 - cellMargin * 2) / 3;
+        CGFloat cellMargin = 5;
+        CGFloat insetTopAndBotton = 10.f;
+        CGFloat cellW = floor(([UIScreen mainScreen].bounds.size.width - edgeMargin * 2 - cellMargin * 4) / 3);
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = cellMargin;
         layout.minimumInteritemSpacing = cellMargin;
         layout.itemSize = CGSizeMake(cellW, cellW);
         layout.sectionInset = UIEdgeInsetsMake(insetTopAndBotton, edgeMargin, insetTopAndBotton, edgeMargin);
-        
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         UICollectionView *imagesCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
         
         [imagesCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([LYMImageCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:kLYMImageCollectionViewCellId];
@@ -53,18 +53,26 @@ static NSString * const kLYMImageCollectionViewCellId = @"LYMImageCollectionView
 
 - (void)setImages:(NSMutableArray *)images {
     if (!images) return;
+    
     if (images.count > _maxImagesCount) {
         [images removeObjectsInRange:NSMakeRange(_maxImagesCount, images.count - _maxImagesCount)];
     }
+    if (!_images) {
+        _images = [NSMutableArray array];
+    }
+    [_images removeAllObjects];
+    [_images addObjectsFromArray:images];
+    
     if (images.count < _maxImagesCount) {
         UIImage *addImage = [UIImage imageNamed:@"add"];
-        [images addObject:addImage];
+        [_images addObject:addImage];
         _hasAdd = YES;
     } else {
         _hasAdd = NO;
     }
-    _images = images;
     [self.imagesCollectionView reloadData];
+    
+    self.imagesCollectionView.frame = self.bounds;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -90,51 +98,37 @@ static NSString * const kLYMImageCollectionViewCellId = @"LYMImageCollectionView
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [_delegate viewDidClickAdd:self index:indexPath.row];
+}
+
+#pragma mark 移动
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    UIImage *image = self.images[fromIndexPath.item];
+    [self.images removeObjectAtIndex:fromIndexPath.item];
+    [self.images insertObject:image atIndex:toIndexPath.item];
     
 }
-//
-//#pragma mark 移动
-//- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
-//    
-//    XDWUploadPhotoModel *uploadM = _showIconArray[fromIndexPath.item];
-//    
-//    [self.showIconArray removeObjectAtIndex:fromIndexPath.item];
-//    [self.showIconArray insertObject:uploadM atIndex:toIndexPath.item];
-//    
-//}
-//
-///**
-// *  判断cell能否被移动
-// *
-// */
-//- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    if (self.iconCount < 6 && indexPath.row == self.iconCount) {
-//        return NO;
-//    } else {
-//        return YES;
-//    }
-//}
-//
-//- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
-//    
-//    if (self.iconCount < 6 && toIndexPath.row == self.iconCount) {
-//        return NO;
-//    } else {
-//        return YES;
-//    }
-//}
-//
-//#pragma mark - XDWSendCommentImageCollectionCellDelegate代理方法
-//- (void)deleteImageWithButtonIndex:(NSInteger)index {
-//    // 点击删除按钮
-//    [_bottomDelegate deleteImageWithIndex:index];
-//}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (_hasAdd && indexPath.row == self.images.count - 1) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    
+    if (_hasAdd && fromIndexPath.row == self.images.count - 1) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 - (void)cellDidClickDelete:(LYMImageCollectionViewCell *)cell {
     NSIndexPath *indexPath = [self.imagesCollectionView indexPathForCell:cell];
-    [self.images removeObjectAtIndex:indexPath.row];
-    [self.imagesCollectionView reloadData];
+    [_delegate viewDidClickDelete:self index:indexPath.row];
 }
 
 @end

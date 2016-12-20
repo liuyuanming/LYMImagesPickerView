@@ -10,7 +10,9 @@
 @class LYMImagesPickerView;
 
 @protocol LYMImagesPickerViewDelegate <NSObject>
-- (void)viewDidClickAdd:(LYMImagesPickerView *)pickerView;
+@optional
+- (void)viewDidClickAdd:(LYMImagesPickerView *)pickerView index:(NSInteger)index;
+- (void)viewDidClickDelete:(LYMImagesPickerView *)pickerView index:(NSInteger)index;
 
 @end
 
