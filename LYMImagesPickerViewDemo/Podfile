@@ -1,0 +1,8 @@
+platform :ios, '8.0'
+
+target 'LYMImagesPickerViewDemo' do
+use_frameworks!
+
+pod 'JFImagePicker'
+
+end
